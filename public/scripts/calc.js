@@ -1,5 +1,32 @@
-//make a calculator
+// Initialize Firebase (config object)
+// const config = {
+//     apiKey: "AIzaSyAGXiEENu108WDleAqYS5_kGP7hGs_1NLg",
+//     authdomain: "calculationswithfriends.firebaseapp.com",
+//     databaseURL: "https://calculationswithfriends.firebaseio.com/",
+//     storageBucket: "calculationswithfriends.appspot.com",
+//     appId: "1:570033050582:web:58f27b04408bf87ca80a77"
+// };
+// and firebase .initiallizeApp(config);
+
+// Database Reference Object
+const dbReference = firebase.database().ref().child('object');
+
+// sync changes
+dbReference.on('equation', snap =>
+    document.getElementById('serverOut').innerText = JSON.stringify(snap.val(), null, 3));
+
+// make a calculator
+
+// to store equation value
+var equation = [];
+
+// equation list from server
 var equations = [];
+
+// get list of equations
+function getEquations() {
+    return dbReference().once('equation').val();
+}
 
 function calculate() {
     // get operands
@@ -17,7 +44,7 @@ function calculate() {
     // calculate
     switch (operator) {
         case "+":
-            result = o1 + o2; 
+            result = o1 + o2;
             break
         case "-":
             result = o1 - o2;
@@ -63,6 +90,8 @@ function displayResults(equations) {
         // print in reverse to textarea
         document.getElementById("display").value += equations[l - 1];
     }
+
+    document.getElementById("serverOut").innerText()
 
 }
 // provide a clean text area to redisplay/update equations
