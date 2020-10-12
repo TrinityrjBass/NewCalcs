@@ -2,3 +2,7 @@
     resize: none;
     overflow-y: hidden;
 }
+
+body {
+    text-align: center;
+}

@@ -7,7 +7,13 @@
     <meta name="keywords" content="Calculator, Calculate with Friends, Sezzle, JavaScript" />
     <title>Calculations with Friends</title>
     <link rel="stylesheet" type="text/css" href="style/style.css" />
-    <script type="text/javascript" src="scripts/calc.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script defer type="text/javascript" src="scripts/calc.js"></script>
 </head>
 
 <body>
@@ -16,26 +22,53 @@
     <input id="operand1" type="number" value="5">
     <!--operator-->
     <select id="operator" name="operator"> 
+        <!-- should be buttons -->
         <option value="+">+</option>
         <option value="-">-</option>
         <option value="*">x</option>
         <option value="/">/</option>
     </select>
     <input id="operand2" type="number" value="6">
+
+    <input type="button" value="=" onclick="calculate()" />
+
     <br />
-    <input type="button" value="calculate" onclick="calculate()" />
     <br />
+    <input type="text" id="calcDisplay">
     <br />
+    <div class="row">
+        <input type="button" value='1'>
+        <input type="button" value='2'>
+        <input type="button" value='3'>
+    </div>
+    <br />
+    <div class="row">
+        <input type="button" value='4'>
+        <input type="button" value='5'>
+        <input type="button" value='6'>
+    </div>
+    <br />
+    <div class="row">
+        <input type="button" value='7'>
+        <input type="button" value='8'>
+        <input type="button" value='9'>
+    </div>
+    <br />
+    <div class="row">
+        <input type="button" value='Cl' onclick="clearHistory()">
+        <input type="button" value='0'>
+
+    </div>
     <textarea id="display" rows="10" placeholder="calculation history" disabled></textarea>
     <br />
-    <input type="button" name="clear" value="clear" onclick="clearHistory()" />
+    <input type="button" name="clear" value="clear" onclick="getEquations()" />
     <br />
     <br />
 
-    <p id="serverOut"></p>
+    <pre id="serverOut"></pre>
 
-    <script src="/__/firebase/7.23.0/firebase-app.js"></script>
-    <script src="/__/firebase/7.23.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 
@@ -44,7 +77,7 @@
     <!-- Clean up frontend : 
     add buttons, 
     center content,
-
+    add single input 'screen'
     make it look pretty (boostrap) -->
 
 </body>
