@@ -4,10 +4,11 @@ body {
 
 @font-face {
     font-family: digital-font;
-    src: url(/public/style/ds_digital/DS-DIGI.TTF);
+    src: url(ds_digital/DS-DIGIB.TTF);
 }
 
 #calcDisplay {
+    font-size: 20pt;
     font-family: digital-font;
     margin-bottom: 15px;
     text-align: right;
