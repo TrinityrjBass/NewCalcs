@@ -6,9 +6,9 @@
     <meta charset="utf-8" />
     <meta name="keywords" content="Calculator, Calculate with Friends, Sezzle, JavaScript" />
     <title>Calculations with Friends</title>
-    <link rel="stylesheet" type="text/css" href="style/style.css" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style/style.css" />
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
@@ -19,53 +19,43 @@
 <body>
     <h1>Calculations with Friends</h1>
 
-    <input id="operand1" type="number" value="5">
-    <!--operator-->
-    <select id="operator" name="operator"> 
-        <!-- should be buttons -->
-        <option value="+">+</option>
-        <option value="-">-</option>
-        <option value="*">x</option>
-        <option value="/">/</option>
-    </select>
-    <input id="operand2" type="number" value="6">
-
-    <input type="button" value="=" onclick="calculate()" />
-
     <br />
     <br />
-    <input type="text" id="calcDisplay">
+    <input type="text" id="calcDisplay" disabled>
     <br />
-    <div class="row">
-        <input type="button" value='1'>
-        <input type="button" value='2'>
-        <input type="button" value='3'>
+    <div class="calcPad container">
+        <div class="row">
+            <button class="btn btn-primary" onClick='build("7")'>7</button>
+            <button class="btn btn-primary" onClick='build("8")'>8</button>
+            <button class="btn btn-primary" onClick='build("9")'>9</button>
+            <button class="btn btn-info" onClick='build("+")'>+</button>
+        </div>
+        <br />
+        <div class="row">
+            <button class="btn btn-primary" onClick='build("4")'>4</button>
+            <button class="btn btn-primary" onClick='build("5")'>5</button>
+            <button class="btn btn-primary" onClick='build("6")'>6</button>
+            <button class="btn btn-info" onClick='build("-")'>&minus;</button>
+        </div>
+        <br />
+        <div class="row">
+            <button class="btn btn-primary" onClick='build("1")'>1</button>
+            <button class="btn btn-primary" onClick='build("2")'>2</button>
+            <button class="btn btn-primary" onClick='build("3")'>3</button>
+            <button class="btn btn-info" onClick='build("*")'>x</button>
+        </div>
+        <br />
+        <div class="row">
+            <button class="btn btn-warning" onclick="clearEquation()">Ce</button>
+            <button class="btn btn-primary" onClick='build("0")'>0</button>
+            <button class="btn btn-info" onClick='build("/")'>&#247;</button>
+            <button class="btn btn-success" onclick='calculate()'>=</button>
+        </div>
+        <br />
     </div>
     <br />
-    <div class="row">
-        <input type="button" value='4'>
-        <input type="button" value='5'>
-        <input type="button" value='6'>
-    </div>
-    <br />
-    <div class="row">
-        <input type="button" value='7'>
-        <input type="button" value='8'>
-        <input type="button" value='9'>
-    </div>
-    <br />
-    <div class="row">
-        <input type="button" value='Cl' onclick="clearHistory()">
-        <input type="button" value='0'>
-
-    </div>
     <textarea id="display" rows="10" placeholder="calculation history" disabled></textarea>
     <br />
-    <input type="button" name="clear" value="clear" onclick="getEquations()" />
-    <br />
-    <br />
-
-    <pre id="serverOut"></pre>
 
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
@@ -73,12 +63,6 @@
      https://firebase.google.com/docs/web/setup#available-libraries -->
 
     <script src="/__/firebase/init.js"></script>
-
-    <!-- Clean up frontend : 
-    add buttons, 
-    center content,
-    add single input 'screen'
-    make it look pretty (boostrap) -->
 
 </body>
 

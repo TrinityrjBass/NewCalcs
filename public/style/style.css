@@ -1,8 +1,23 @@
+body {
+    text-align: center;
+}
+
+@font-face {
+    font-family: digital-font;
+    src: url(/public/style/ds_digital/DS-DIGI.TTF);
+}
+
+#calcDisplay {
+    font-family: digital-font;
+    margin-bottom: 15px;
+    text-align: right;
+}
+
+.btn {
+    font-size: 20px;
+}
+
 #display {
     resize: none;
     overflow-y: hidden;
-}
-
-body {
-    text-align: center;
 }
