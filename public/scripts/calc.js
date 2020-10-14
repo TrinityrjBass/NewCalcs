@@ -6,6 +6,10 @@ var dbFilter = dbReference.limitToLast(10);
 
 // bool flag for clearing display
 var finished = false;
+
+// bool flag for preventing multiple operators
+var prevIsOperator = false;
+
 // to store equation value
 var equation = "";
 
@@ -56,16 +60,41 @@ function sendEquation(newEquation) {
 }
 
 function build(n) {
+    // if the equation is still being built
     if (finished == false) {
+        if (equation == '') {
+            updateCalcDisplay('');
+        }
         // keep building equation
+        prevIsOperator = false;
         equation += n;
     } else {
-        // new equation, clear old one
+        // new equation, reset calculator
         clearEquation();
         equation = n;
         finished = false;
+        prevIsOperator = false;
     }
-    document.getElementById("calcDisplay").value = equation;
+    updateCalcDisplay(equation);
+}
+// "minus" is not included to allow for negative numbers
+function operator(o) {
+
+    if (finished == true) {
+        finished = false;
+        clearEquation();
+        prevIsOperator = true;
+        if (o == '-') {
+            equation = o;
+        }
+        // we want - to be available, and clear equation
+    } else if (equation.length > 0 && prevIsOperator == false) {
+        // prevent duplicates, and no ops at beginning
+        prevIsOperator = true;
+        equation += o;
+    }
+    updateCalcDisplay(equation);
+
 }
 
 // Calulate the equation
@@ -77,26 +106,34 @@ function calculate() {
     // calculate equation
     try {
         result = "=" + eval(equation);
-        equation += result;
+        if (result !== "=undefined") {
+            equation += result;
 
-        // show full equation on calculator
-        document.getElementById("calcDisplay").value = equation;
+            // show full equation on calculator
+            updateCalcDisplay(equation);
 
-        // add equation to db
-        sendEquation(equation);
+            // add equation to db
+            sendEquation(equation);
+        }
+
     } catch (e) {
         result = "error calculating " + equation;
-        // show everyone the error
-        sendEquation(result);
+        // clear equation, show error
+        clearEquation()
+        updateCalcDisplay("error");
     }
 
     // add to display box
     displayResults(equations);
 }
-// 
+
+function updateCalcDisplay(s) {
+    document.getElementById("calcDisplay").value = s
+}
+
 function displayResults(equations) {
     // clear the text area so we don't duplicate entries
-    document.getElementById("display").value = ''
+    document.getElementById("display").value = '';
 
     // and repopulate the text area
     if (equations.length === undefined) {
@@ -112,7 +149,8 @@ function displayResults(equations) {
 // provide a clean text area to redisplay/update equations
 function clearEquation() {
     equation = '';
-    document.getElementById("calcDisplay").value = '';
+    updateCalcDisplay('');
+    prevIsOperator = false;
 }
 
 $(document).ready(getEquations());
